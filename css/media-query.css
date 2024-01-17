@@ -1,0 +1,27 @@
+@media screen and (max-width: 1400px) {}
+
+@media screen and (max-width: 1200px) {}
+
+@media screen and (max-width: 992px) {}
+
+@media screen and (max-width: 768px) {
+    .navbar-expand-md .navbar-nav .nav-link {
+        border: none;
+        padding: 0.5rem 0;
+    }
+    a.navbar-brand {
+        font-size: 1rem;
+    }
+    .navbar-toggler {
+        font-size: 0.75rem;
+    }
+    .navbar .navbar-nav {
+        background-color: var(--bg-secondary-color);
+        margin-top: 12px;
+        border-radius: 5px;
+    }
+}
+
+@media (max-width: 576px) {
+
+}
