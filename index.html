@@ -49,7 +49,7 @@
     <section id="searchForm">
       <div class="container d-flex align-items-center justify-content-center">
         <div class="position-relative flex-grow-1">
-          <input type="text" class="form-control rounded-pill" placeholder="Search for a country..">
+          <input type="text" class="form-control rounded-pill" id="countryInput" placeholder="Search for a country..">
           <input type="button" value="Find"
             class="btn-find rounded-pill position-absolute top-0 bottom-0 end-0 m-1 px-5">
         </div>
@@ -62,23 +62,32 @@
           <div class="col-lg-4">
             <div class="card">
               <div class="card-header d-flex justify-content-between">
-                <p class="date mb-0">Day</p>
-                <p class="date mb-0">Date</p>
+                <p class="date mb-0" id="day">Day</p>
+                <p class="date mb-0" id="date">Date</p>
               </div>
               <div class="card-body">
-                <h5 class="card-title mb-3">City Name</h5>
+                <h5 class="card-title mb-3" id="locationName">City Name</h5>
                 <div class="card-text">
                   <div class="d-flex flex-column justify-content-center align-items-center gap-2">
-                    <p class="fs-4 mb-0">Icon</p>
-                    <p class="fs-1 m-0">Temperature</p>
-                    <p class="fs-4 mb-0 color-primary">WeatherState</p>
+                    <!-- <img class="fs-4 mb-0">Icon</p> -->
+                    <img src="" class="fs-4 mb-0" id="weatherIcon" alt="">
+                    <p class="fs-1 m-0"><span id="temperature"></span>&deg;C</p>
+                    <p class="fs-4 mb-0 color-primary" id="weatherState">WeatherState</p>
                   </div>
                 </div>
               </div>
               <div class="card-footer d-flex justify-content-around">
-                <p class="m-0">state1</p>
-                <p class="m-0">state2</p>
-                <p class="m-0">state3</p>
+                <p class="m-0">
+                  <i class="fa-solid fa-umbrella me-2"></i>
+                  <span id="rainPercentage">state1</span>
+                </p>
+                <p class="m-0">
+                  <i class="fa-solid fa-wind me-2"></i>
+                  <span id="windSpeed">state2</span>
+                <span>km/h</span></p>
+                <p class="m-0">
+                  <i class="fa-solid fa-compass me-2"></i>
+                  <span id="windDirection">state3</span></p>
               </div>
             </div>
           </div>
@@ -119,6 +128,8 @@
 
   <script src="./js/lib/bootstrap.bundle.min.js"></script>
   <script src="./js/lib//fontAwesome.all.min.js"></script>
+  <script src="./js/lib/jquery.js"></script>
+  <script src="./js/index.js"></script>
 </body>
 
 </html>
