@@ -1,12 +1,16 @@
-// API KEY: f40f32f309994030b4d121222241701
-// example query: http://api.weatherapi.com/v1/search.json?key=f40f32f309994030b4d121222241701&q=lon
+////////////////////////////////////////////////////////////////////
+// Init setup
 "use strict";
 const BASE_API_URL = "http://api.weatherapi.com/v1/forecast.json";
 const API_KEY = "f40f32f309994030b4d121222241701";
 
 const START_CITY = "Cairo";
-
 let lastSearchParam = "";
+
+getLocationWeatherByName('cairo');
+
+////////////////////////////////////////////////////////////////////
+// Event listeners
 
 $("#countryInput").on("keyup", function () {
   let value = $(this).val();
@@ -16,26 +20,69 @@ $("#countryInput").on("keyup", function () {
   }
 });
 
+////////////////////////////////////////////////////////////////////
+// API calling
+
 function getLocationWeatherByName(search) {
   fetch(`${BASE_API_URL}?key=${API_KEY}&q=${search}&days=3`)
     .then((response) => {
       if (response.ok) return response.json();
+      else return;
     })
     .then((data) => {
+        if (data === undefined) return;
       // map data
       const mappedData = mapResult(data);
-      // update ui
-      $('#locationName').text(mappedData.locationName);
-      $('#windDirection').text(mappedData.windDirection);
-      $('#rainPercentage').text(mappedData.rainPercentage);
-      $('#windSpeed').text(mappedData.windSpeed);
-      console.log(mappedData.date);
-      $('#date').text(mappedData.days[0].date);
-      $('#day').text(mappedData.days[0].day);
-      $('#weatherIcon').attr('src', `${mappedData.days[0].Icon}`);
-      $('#temperature').text(mappedData.days[0].temperature);
-      $('#weatherState').text(mappedData.days[0].weatherState);
+      if (mappedData.locationName != $("#locationName").text) {
+        const oldCards = document.querySelectorAll("[--data-added-card]");
+        oldCards.forEach((card) => {
+          card.remove();
+        });
+        // update main card
+        $("#locationName").text(mappedData.locationName);
+        $("#windDirection").text(mappedData.windDirection);
+        $("#rainPercentage").text(mappedData.rainPercentage);
+        $("#windSpeed").text(mappedData.windSpeed);
+        updateMainCardWeather(mappedData.days[0]);
+
+        // create secondary cards
+        addCards(mappedData.days[1], mappedData.days[2]);
+      }
     });
+}
+
+////////////////////////////////////////////////////////////////////
+// UI functions
+
+function updateMainCardWeather(data) {
+  $("#date").text(data.date);
+  $("#day").text(data.day);
+  $("#weatherIcon").attr("src", `${data.Icon}`);
+  $("#temperature").text(data.temperature);
+  $("#weatherState").text(data.weatherState);
+}
+
+function addCards(...cardData) {
+  for (let i = 0; i < cardData.length; i++) {
+    let cardLiteral = `
+    <div class="col-lg-4 d-flex" --data-added-card>
+            <div class="card flex-grow-1">
+              <div class="card-header text-center">
+                <p class="date mb-0">${cardData[i].day}</p>
+              </div>
+              <div class="card-body d-flex flex-column justify-content-center align-items-md-center gap-2 text-center">
+                <div class="card-text">
+                <img src="${cardData[i].Icon}" class="fs-4 mb-0" alt="">
+                  <p class="fs-1 m-2">${cardData[i].temperature} &deg;C</p>
+                  <p class="fs-4 mb-2 color-primary">${cardData[i].weatherState}</p>
+                </div>
+              </div>
+
+            </div>
+          </div>`;
+
+    document.querySelector("#cards").innerHTML += cardLiteral;
+  }
 }
 
 ////////////////////////////////////////////////////////////////////
@@ -52,7 +99,6 @@ function mapResult(data) {
     windDirection: translateWindDirection(data.current.wind_dir),
     rainPercentage: `${Math.trunc(data.current.pressure_in)}%`,
   };
-  console.log(mappedObj);
   return mappedObj;
 }
 
