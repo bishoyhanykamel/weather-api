@@ -34,3 +34,16 @@
 }
 
 
+/****************************************/
+/* Weather Data */
+
+#weatherData .card {
+    background-color: #323544;
+    color: var(--text-grey-color);
+}
+
+
+#weatherData .card-header {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-bottom: 0;
+}
