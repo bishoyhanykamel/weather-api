@@ -5,6 +5,9 @@
 @media screen and (max-width: 992px) {}
 
 @media screen and (max-width: 768px) {
+    :root {
+        font-size: 16px;
+    }
     .navbar-expand-md .navbar-nav .nav-link {
         border: none;
         padding: 0.5rem 0;
@@ -23,5 +26,16 @@
 }
 
 @media (max-width: 576px) {
+    :root {
+        font-size: 14px;
+    }
+}
 
+@media (max-width: 368px) {
+    :root {
+        font-size: 10px;
+    }
+    .btn-find {
+        display:none;
+    }
 }
