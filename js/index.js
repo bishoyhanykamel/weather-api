@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////
 // Init setup
 "use strict";
-const BASE_API_URL = "http://api.weatherapi.com/v1/forecast.json";
+const BASE_API_URL = "https://api.weatherapi.com/v1/forecast.json";
 const API_KEY = "f40f32f309994030b4d121222241701";
 
 const START_CITY = "Cairo";
@@ -112,7 +112,7 @@ function extractDayWeather(obj) {
   dayWeather.date = [date[2], date[1]].join(" ");
 
   // map weather details
-  dayWeather.Icon = `http://${obj.day.condition.icon.substring(2)}`;
+  dayWeather.Icon = `https://${obj.day.condition.icon.substring(2)}`;
   dayWeather.temperature = obj.day.avgtemp_c;
   dayWeather.weatherState = obj.day.condition.text;
 
