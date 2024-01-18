@@ -44,3 +44,7 @@ body {
 
 /****************************************/
 /* Footer */
+footer {
+  background-color: var(--bg-secondary-color);
+  color: var(--text-grey-color);
+}
