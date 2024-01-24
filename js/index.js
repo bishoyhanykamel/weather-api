@@ -25,7 +25,7 @@ $("#countryInput").on("keyup", function () {
 
 function getLocationWeatherByName(search) {
   fetch(`${BASE_API_URL}?key=${API_KEY}&q=${search}&days=3`)
-    .then((response) => {
+    .then((response) => { 
       if (response.ok) return response.json();
       else return;
     })
